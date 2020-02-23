@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Change's Info</title>
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">AutoTune</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cars/">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/staff/">Staff</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><<</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<img src="" id="img">
+<div id="meca"  class="card" style="width: 18rem;">
+  <img id="mec" class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+
+    <h5 class="card-title">	<img src="/static/mechanic .png"> Mechanic</h5>
+    <p class="card-text">{{info.0.fname}} {{info.0.lname}} lives in {{info.0.country}}, {{info.0.city}}. Works at {{info.0.autotune_name}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+	<div id="infos">
+		<div class="row"><img src="/static/detail.png"> Detail: <span style="margin-left: 150px;">{{info.0.detail_name}}</span></div>	<hr>
+		<div class="row"><img src="/static/coin.png">Price:<span style="margin-left: 160px;">{{info.0.detail_price}}T</span></div>	
+	</div>
+
+	<div id="infos2">
+		<div class="row"><img src="/static/calendar.png"> Date of change: <span style="margin-left: 80px;">{{info.0.change_date}}</span></div>	<hr>
+		<div class="row"><img src="/static/car.png">Car:<span style="margin-left: 160px;">{{info.0.mark}}</span></div>	
+	</div>
+
+	<p id="lorem">	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+	<!-- Footer -->
+<footer class="page-footer font-small bg-dark">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3 text-white">© 2019 Copyright:
+    <a href="https://sdu.edu.kz/ru/suleyman-demirel-university-ru/"> sdu.edu.kz</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+	<script type="text/javascript" src="/static/jquerys.min.js"></script>
+	<script type="text/javascript">
+		change_imgs = {
+			'Body':'/static/bodychange.jpg',
+			'Car chassis':'/static/chassis.jpg',
+			'Door dings':'/static/doordings.jpg',
+			'Engine':'/static/engine.jpg',
+			'Transmission':'/static/transmission.jpg',
+			'Wheels':'/static/doorwheels.jpg'
+		}
+		mecs = [
+		'/static/mec1.jpg',
+		'/static/mec2.jpg',
+		'/static/mec3.jpg',
+		'/static/mec4.jpg',
+		'/static/mec5.jpg',
+		]
+		
+		$('#img').attr('src',change_imgs['{{info.0.type_of_change}}']);
+		$('#mec').attr('src',mecs[Math.floor(Math.random()*5)]);
+	</script>
+<style type="text/css">
+	#lorem	{
+		margin-top: 750px;
+		margin-left: 100px;
+		margin-right: 450px;
+	}
+	#infos2 {
+		position: absolute;
+		margin-top: 600px;
+		margin-left: 550px;
+	}
+	#infos {
+		position: absolute;
+		margin-top: 600px;
+		margin-left: 120px;
+	}
+	#infos,#infos2 >div {
+		font-family: cursive;
+		color:green;
+	}
+	body {
+
+	}
+	#meca {
+		margin-left: 1000px;
+		margin-top: 80px;
+		position: absolute;
+	}
+	#mec {
+	
+		width: 286px;
+		height: 250px;
+	}
+	#img {
+		position: absolute;
+		margin-top: 80px;
+		margin-left: 100px;
+		height: 455px;
+		border-radius: 10px;
+		width: 800px;
+	}
+</style>
+
+</body>
+</html>

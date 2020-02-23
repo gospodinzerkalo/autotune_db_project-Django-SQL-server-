@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Autotune - Staff</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Autotune</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cars/">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/staff/">Staff</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="header">
+	<h1 id="h1">AutoTunes Staff</h1>
+</div>
+
+
+<div class="container cont">
+	<div class="row">
+		<div class="col-sm alert alert-info">
+			<div class="row"><h3 class="col" id="name"></h3></div>
+			<div class="row"><p class="col" id="autotune_name"></p></div>
+			<div class="row"><p class="col" id="position_name"></p></div>
+			<div class="row"><p class="col" id="salary"></p></div>
+			<div class="row"><p class="col" id="hire_date"></p></div>
+			<div class="row"><p class="col" id="city"></p></div>
+			
+		</div>
+		<div class="col-sm">
+			<button type="button" class="btn btn-primary btn-lg alert alert-danger" id="next" style="margin-top: 100px;">>>>></button>
+		</div>
+		<div class="col-sm alert alert-info">
+			<div class="row"><h3 class="col" id="name2"></h3></div>
+			<div class="row"><p class="col" id="autotune_name2"></p></div>
+			<div class="row"><p class="col" id="position_name2"></p></div>
+			<div class="row"><p class="col" id="salary2"></p></div>
+			<div class="row"><p class="col" id="hire_date2"></p></div>
+			<div class="row"><p class="col" id="city2"></p></div>
+			
+		</div>
+	</div>
+</div>
+<div class="container alert alert-danger"></div>
+<div class="row alert alert-success">
+	<div class="col-sm">
+		
+		<form method="POST" id="search2">
+			{% csrf_token %}
+			<label>Search</label>
+			<input type="text"  name="searchby"><br>
+			<label>BY</label>
+			<ul>
+				<li><input type="radio" value="first_name" name="search"> First name</li>
+				<li><input type="radio" value="last_name" name="search"> Last name</li>
+				<li><input type="radio" value="autotune_name" name="search"> AutoTune</li>
+				<li><input type="radio" value="city_name" name="search"> City</li>
+			</ul>
+			<input type="submit" name="" value="Search">
+
+		</form>
+	</div>
+	<div class="col-sm">
+			<div class="row"><h3 class="col" id="name0"></h3></div>
+			<div class="row"><p class="col" id="autotune_name0"></p></div>
+			<div class="row"><p class="col" id="position_name0"></p></div>
+			<div class="row"><p class="col" id="salary0"></p></div>
+			<div class="row"><p class="col" id="hire_date0"></p></div>
+			<div class="row"><p class="col" id="city0"></p></div>
+		</div>
+		<button id="next0">></button>
+
+</div>
+
+<footer class="page-footer font-small bg-dark">
+
+  <div class="footer-copyright text-center py-3 text-white">© 2019 Copyright:
+    <a href="https://sdu.edu.kz/ru/suleyman-demirel-university-ru/"> sdu.edu.kz</a>
+  </div>
+
+
+</footer>
+
+
+<script type="text/javascript" src="/static/jquerys.min.js"></script>
+<script type="text/javascript">
+
+	var list = new Array();
+	"{% for row in rows %}"
+		var dic = {
+			'id':'{{row.id}}',
+			'first_name':'{{row.first_name}}',
+			'last_name':'{{row.last_name}}',
+			'autotune_name':'{{row.autotune_name}}',
+			'hire_date':'{{row.hire_date}}',
+			'position_name':'{{row.position_name}}',
+			'salary':'{{row.salary}}',
+			'city':'{{row.city}}'
+		}
+		list.push(dic)
+	"{% endfor %}"
+
+	var list2 = new Array();
+	"{% for emp in emps %}"
+		var dic2 = {
+			'id' : '{{emp.id}}',
+			'first_name':'{{emp.first_name}}',
+			'last_name':'{{emp.last_name}}',
+			'autotune_name':'{{emp.autotune_name}}',
+			'hire_date':'{{emp.hire_date}}',
+			'position_name':'{{emp.position_name}}',
+			'salary':'{{emp.salary}}',
+			'city':'{{emp.city}}'
+		}
+		list2.push(dic2)
+	"{% endfor %}"
+
+	
+
+
+	$(document).ready(function(){
+		$('#name').html(list[0]['first_name']+" "+list[0]['last_name']);
+		$('#autotune_name').html('AutoTune: '+list[0]['autotune_name']);
+		$('#position_name').html('Position: '+list[0]['position_name']);
+		$('#salary').html("Salary: "+list[0]['salary']+"$");
+		$('#hire_date').html('Hire Date: '+list[0]['hire_date']);
+		$('#city').html('City: '+list[0]['city']);
+		
+
+		
+		
+		
+	
+		
+
+		$('#name2').html(list[1]['first_name']+" "+list[1]['last_name']);
+		$('#autotune_name2').html('AutoTune: '+list[1]['autotune_name']);
+		$('#position_name2').html('Position: '+list[1]['position_name']);
+		$('#salary2').html("Salary: "+list[1]['salary']+"$");
+		$('#hire_date2').html('Hire Date: '+list[1]['hire_date']);
+		$('#city2').html('City: '+list[1]['city']);		
+		
+
+		if (list2.length!=0) {
+
+			$('#name0').html(list2[0]['first_name']+" "+list2[0]['last_name']);
+			$('#autotune_name0').html('AutoTune: '+list2[0]['autotune_name']);
+			$('#position_name0').html('Position: '+list2[0]['position_name']);
+			$('#salary0').html("Salary: "+list2[0]['salary']+"$");
+			$('#hire_date0').html('Hire Date: '+list2[0]['hire_date']);
+			$('#city0').html('City: '+list2[0]['city']);		
+		}	
+		var ind0 = 1;
+		$('#next0').on('click',function(){
+			if (ind0<list2.length) {
+				$('#name0').html(list2[ind0]['first_name']+" "+list2[ind0]['last_name']);
+				$('#autotune_name0').html('AutoTune: '+list2[ind0]['autotune_name']);
+				$('#position_name0').html('Position: '+list2[ind0]['position_name']);
+				$('#salary0').html("Salary: "+list2[ind0]['salary']+"$");
+				$('#hire_date0').html('Hire Date: '+list2[ind0]['hire_date']);
+				$('#city0').html('City: '+list2[ind0]['city']);
+				ind0++;
+			}else{
+				ind0= 1;
+				$('#name0').html(list2[0]['first_name']+" "+list2[0]['last_name']);
+				$('#autotune_name0').html('AutoTune: '+list2[0]['autotune_name']);
+				$('#position_name0').html('Position: '+list2[0]['position_name']);
+				$('#salary0').html("Salary: "+list2[0]['salary']+"$");
+				$('#hire_date0').html('Hire Date: '+list2[0]['hire_date']);
+				$('#city0').html('City: '+list2[0]['city']);
+			}
+		});
+
+
+
+		var ind1=1;
+		var ind2=2;
+		$('#next').on('click',function(){
+			if (ind2<list.length) {
+				$('#name').html(list[ind1]['first_name']+" "+list[ind1]['last_name']);
+				$('#autotune_name').html('AutoTune: '+list[ind1]['autotune_name']);
+				$('#position_name').html('Position: '+list[ind1]['position_name']);
+				$('#salary').html("Salary: "+list[ind1]['salary']+"$");
+				$('#hire_date').html('Hire Date: '+list[ind1]['hire_date']);
+				$('#city').html('City: '+list[ind1]['city']);		
+				
+				
+
+
+				$('#name2').html(list[ind2]['first_name']+" "+list[ind2]['last_name']);
+				$('#autotune_name2').html('AutoTune: '+list[ind2]['autotune_name']);
+				$('#position_name2').html('Position: '+list[ind2]['position_name']);
+				$('#salary2').html("Salary: "+list[ind2]['salary']+"$");
+				$('#hire_date2').html('Hire Date: '+list[ind2]['hire_date']);
+				$('#city2').html('City: '+list[ind2]['city']);
+				$('#href2').attr('href','{%url "info" '+list[ind2]['id']+'%)');
+				ind1++;
+				ind2++;
+			}else{
+				ind1 = 1;
+				ind2 = 2;
+				$('#name').html(list[0]['first_name']+" "+list[0]['last_name']);
+				$('#autotune_name').html('AutoTune: '+list[0]['autotune_name']);
+				$('#position_name').html('Position: '+list[0]['position_name']);
+				$('#salary').html("Salary: "+list[0]['salary']+"$");
+				$('#hire_date').html('Hire Date: '+list[0]['hire_date']);
+				$('#city').html('City: '+list[0]['city']);		
+
+				$('#name2').html(list[1]['first_name']+" "+list[1]['last_name']);
+				$('#autotune_name2').html('AutoTune: '+list[1]['autotune_name']);
+				$('#position_name2').html('Position: '+list[1]['position_name']);
+				$('#salary2').html("Salary: "+list[1]['salary']+"$");
+				$('#hire_date2').html('Hire Date: '+list[1]['hire_date']);
+				$('#city2').html('City: '+list[1]['city']);
+			}
+		});
+	});
+
+</script>
+<style type="text/css">
+	#search2 {
+		margin-left: 300px;
+	}
+	.col {
+		text-align: center;
+	}
+	body {
+		background-image: url('/static/body2.jpg');
+	}
+	.cont {
+		text-align: center;
+		margin-top: 50px;
+	}
+	#header {
+		width: 100%;
+		height: 500px;
+		background-image: url('/static/staff.jpg');
+		background-size: 900px;
+	}
+	#h1 {
+		padding-top: 60px;
+		font-family: serif;
+		font-size: 70px;
+		text-align: center;
+	}
+	
+.flex-container {
+	margin-left: 200px;
+	margin-top: 300px;
+	width: 600px;
+	height: 120px;
+  display: flex;
+  background-color: DodgerBlue;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  height: 100px;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 30px;
+}
+</style>
+</body>
+</html>

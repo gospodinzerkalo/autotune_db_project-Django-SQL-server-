@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Autotune - cars</title>
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">AutoTune</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cars/">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/staff/">Staff</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="cars" class="card" style="width: 50rem;">
+  <img id="car" class="card-img-top" src="" alt="Card image cap">
+  <div class="card-body">
+    <h5 style="font-size: 25px;text-align: center" id="li3" class="card-title"></h5>
+    <p id="card_t" class="card-text">The owner of this car {{rows.0.name}} {{rows.0.surname}}</p>
+    <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#myModal">More Info</button>
+    <button onclick="nextCar()" class="btn btn-primary">Next car</button>
+  </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">More Info</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p id="li1"></p>
+        <p id="li2"></p>
+        <p id="li4"></p>
+        <p id="li5"></p>
+        <p id="li6"></p>
+        <p id="li7"></p>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div id="flip">Insert Car</div>
+<div id="panel">
+	<form method="POST">
+		{% csrf_token %}
+		<div class="alert alert-info">
+			<div class="row">
+				<div class="col-sm"><label>Name:</label></div>
+				<div class="col-sm"><input type="text" name="name"></div>
+				<div class="col-sm"><label>Surname:</label></div>
+				<div class="col-sm"><input type="text" name="surname"></div>				
+				
+			</div>
+			<div class="row">
+				<div class="col-sm"><label>Mark:</label></div>
+				<div class="col-sm"><input type="text" name="mark"></div>
+				<div class="col-sm"><label>Power:</label></div>
+				<div class="col-sm"><input type="text" name="power"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm"><label>Color:</label></div>
+				<div class="col-sm"><input type="text" name="color"></div>
+				<div class="col-sm"><label>Max Speed:</label></div>
+				<div class="col-sm"><input type="text" name="max_speed"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm"><label>Owner ID:</label></div>
+				<div class="col-sm"><input type="text" name="owner_id"></div>
+				<div class="col-sm"><label>Car ID:</label></div>
+				<div class="col-sm"><input type="text" name="car_id"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm"><label>Release Date:</label></div>
+				<div class="col-sm"><input type="date" name="release_date"></div>
+			</div>
+		</div>
+		<input class="btn btn-primary" type="submit" name="submit" value="Create">
+	</form>
+</div>
+
+<div class="container fo">
+	<div class="row">
+		<div class="col-sm">
+			
+			<form method="post" action=''>
+				{% csrf_token %}
+				<input style="height: 10px;" type="text" class="alert alert-info" name="car">
+				<input type="submit" class="btn btn-danger" value="search" name=""><br>
+				<label>Sort by Speed</label>
+				<input type="radio" name="order" value="max_speed"><br>
+				<label>Sort By Power</label>
+				<input type="radio" name="order" value="power">
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<style type="text/css">
+	.fo {
+		position: absolute;
+		margin-left: 635px;
+
+		width: 400px;
+		margin-top: 0px;
+	}
+	#cars {
+		position: absolute;
+		margin-left: 100px;
+		margin-top: 0px;
+	}
+		label	{
+			font-size: 11px;
+		}
+	body {
+		background-image: url("/static/bg3.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	#car {
+		
+		width:495px;
+		height:400px;
+		border-radius: 15px;
+
+	}
+	
+	.di {
+		color:red;
+		font-family: fantasy;
+		font-size: 20px;
+	}
+	.d{
+		font-size:20px;
+		font-family: cursive;
+	}
+
+
+	#cont {
+		margin-top: 50px;
+		margin-left: 100px;	
+	}
+	#panel, #flip {
+			
+		margin-left:650px;
+		width: 50%;
+  		padding: 5px;
+  		text-align: center;
+ 		background-color: #e5eecc;
+  		border: solid 1px #c3c3c3;
+  	}
+
+	#panel {
+
+		margin-top: 0px;
+		height: 230px;
+  		width: 50%;
+  		display: none;
+  	}
+</style>
+<script type="text/javascript" src="/static/jquerys.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		 $("#flip").click(function(){
+    		$("#panel").slideToggle("slow");
+  		});
+
+	});
+	var list = new Array();
+	"{% for row in rows %}"
+		var dic = {
+			'name':"{{row.name}}",
+			'surname':"{{row.surname}}",
+			'mark':"{{row.mark}}",
+			'color':"{{row.color}}",
+			'power':"{{row.power}}",
+			'max_speed':"{{row.max_speed}}",
+			'release_date':"{{row.release_date}}",
+		}
+		list.push(dic)
+
+	"{% endfor %}"
+	
+	var cars = {"Mersedes":'/static/mers.jpg',"BMW":'/static/bmw.jpg',"Golf":'/static/golf.jpg',"Passat":'/static/passat.jpg',"Lada":'/static/lada.jpeg',"Acura":'/static/acura.jpg',"Aston Martin":'/static/aston.jpg',"Audi":'/static/audi.jpg',"Bentley":'/static/bentley.jpg',"Buick":'/static/buick.jpg',
+		"Chery":'/static/chery.jpg',"Dacia":'/static/dacia.jpg',"Bugatti":'/static/bugatti.jpg',"Chevrolet":'/static/chevrolet.jpg',"Daewoo":'/static/daewoo.jfif',"Dodge":'/static/dodge.jpg',"Ford":'/static/ford.jpg',"DS":'/static/ds.jpg',"Fiat":'/static/fiat.jpg',"Honda":'/static/honda.jpg',
+			"Ferrari":'/static/ferrari.jpg','Huyndai':'/static/hyunday.jpg','Jeep':'/static/jeep.jpg'}
+	ind = 1;
+
+
+	document.getElementById('li1').innerHTML ="Name: "+ list[0]['name'];
+			document.getElementById('li2').innerHTML ="Surname: "+list[0]['surname'];
+			document.getElementById('li3').innerHTML =list[0]['mark'];
+			document.getElementById('li4').innerHTML ="Color: "+ list[0]['color'];
+			document.getElementById('li5').innerHTML ="Power: "+list[0]['power'];
+			document.getElementById('li6').innerHTML ="Max Speed: "+list[0]['max_speed']+"km/h";
+			document.getElementById('li7').innerHTML ="Release Date: "+list[0]['release_date'];
+			document.getElementById('car').src = cars[list[0]['mark'].trim()];
+	
+	function nextCar(){
+		if (ind<list.length) {
+			document.getElementById('li1').innerHTML ="Name: "+list[ind]['name'];
+			document.getElementById('li2').innerHTML ="Surname: "+list[ind]['surname'];
+			document.getElementById('li3').innerHTML =list[ind]['mark'];
+			document.getElementById('li4').innerHTML ="Color: "+list[ind]['color'];
+			document.getElementById('li5').innerHTML ="Power: "+ list[ind]['power'];
+			document.getElementById('li6').innerHTML ="Max Speed: " +list[ind]['max_speed']+"km/h";
+			document.getElementById('li7').innerHTML ="Release Date: " +list[ind]['release_date'];
+			document.getElementById('car').src = cars[list[ind]['mark'].trim()];
+			document.getElementById('card_t').innerHTML = "The owner of this car "+list[ind]['name']+" "+list[ind]['surname'];
+
+			ind++;
+	}else{
+		ind =0;
+		return nextCar();
+	}
+	}
+
+</script>
+</body>
+</html>
